@@ -5,7 +5,7 @@
             <level>INFO</level>
         </filter>
         <log>application.log</log> <!-- Optional : default java.log -->
-        <resourceType>test_app</resourceType> <!-- Optional : default: auto-detected, fallback: global -->
+        <!-- <resourceType>test_app</resourceType> Optional : default: auto-detected, fallback: global -->
 <!--        <enhancer>com.example.logging.logback.enhancers.ExampleEnhancer</enhancer>-->
 <!--        <flushLevel>WARN</flushLevel> &lt;!&ndash; Optional : default ERROR &ndash;&gt;-->
     </appender>

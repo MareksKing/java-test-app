@@ -18,7 +18,7 @@ public class TestController {
     @GetMapping
     public ResponseEntity<String> getOKResponse() {
         log.info("Accessed /alive endpoint");
-        return new ResponseEntity<>("Hello World!", HttpStatus.OK);
+        return new ResponseEntity<>("Hello World! version: 08", HttpStatus.OK);
     }
 
 }
