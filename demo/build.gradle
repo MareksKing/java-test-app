@@ -8,7 +8,7 @@ plugins {
 
 group = 'com.starujupite.test'
 version = '0.0.1-SNAPSHOT'
-jib.to.image = 'europe-north1-docker.pkg.dev/straujupite-project/test-app-repo/test-app:${System.getenv('RELEASE_TAG')}"' //only change the version number everything else is important
+//jib.to.image = 'europe-north1-docker.pkg.dev/straujupite-project/test-app-repo/test-app:${System.getenv('RELEASE_TAG')}"' //only change the version number everything else is important
 jib.container.creationTime = 'USE_CURRENT_TIMESTAMP' // without this the image is created with a creating time of 52 years ago
 jib.from.image="openjdk:17-jdk-slim" //java version to use
 
