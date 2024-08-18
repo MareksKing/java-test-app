@@ -40,9 +40,9 @@ jobs:
           credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
 
       - name: Configure Docker to use Google Artifact Registry
-        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+        run: gcloud auth configure-docker europe-north1-docker.pkg.dev
 
       - name: Build Docker image using Jib
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: cd demo && ./gradlew jib --image=europe-north1-docker.pkg.dev/straujupite-project/test-app-repo/test-app:$RELEASE_TAG
+        run: cd demo && ./gradlew jibDockerBuild --image=europe-north1-docker.pkg.dev/straujupite-project/test-app-repo/test-app:$RELEASE_TAG
