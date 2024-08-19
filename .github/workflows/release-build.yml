@@ -50,3 +50,21 @@ jobs:
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
         run: cd demo && ./gradlew jib --image=europe-north1-docker.pkg.dev/straujupite-project/test-app-repo/test-app:$RELEASE_TAG
+      
+      - name: Create instance template from existing VM
+        run: |
+          INSTANCE_NAME=str-btx-template-v1
+          RAW_TEMPLATE_NAME=str-btx-template-${{ github.event.release.tag_name }}
+          TEMPLATE_NAME=$(echo $RAW_TEMPLATE_NAME | sed 's/\./-/g')
+          gcloud compute instance-templates create $TEMPLATE_NAME \
+            --source-instance=$INSTANCE_NAME \
+            --source-instance-zone=europe-north1-a \
+            --region=europe-north1 \
+            --metadata=startup-script="#! /bin/bash\nsudo docker run -d --rm europe-north1-docker.pkg.dev/straujupite-project/test-app-repo/test-app:${{ github.event.release.tag_name }}"
+
+      - name: Update managed instance group
+        run: |
+          INSTANCE_GROUP=my-instance-group
+          gcloud compute instance-groups managed rolling-action start-update $INSTANCE_GROUP \
+            --version=template=$TEMPLATE_NAME \
+            --region=europe-north1
