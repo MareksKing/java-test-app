@@ -66,6 +66,6 @@ jobs:
       - name: Update managed instance group
         run: |
           INSTANCE_GROUP=str-btx-service
-          gcloud compute instance-groups managed rolling-action set-instance-template $INSTANCE_GROUP \
+          gcloud compute instance-groups managed set-instance-template $INSTANCE_GROUP \
             --template=$TEMPLATE_NAME \
             --zone=europe-north1-a
