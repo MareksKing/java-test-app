@@ -60,7 +60,7 @@ jobs:
             --source-instance=$INSTANCE_NAME \
             --source-instance-zone=europe-north1-a \
             --region=europe-north1 \
-            --network-interface=network=default,network-tier=PREMIUM,adress='' \
+            --network-interface=network=default,network-tier=PREMIUM,address='' \
             --metadata=startup-script="#! /bin/bash\nsudo docker run -d --rm europe-north1-docker.pkg.dev/straujupite-project/test-app-repo/test-app:${{ github.event.release.tag_name }}"
 
       - name: Update managed instance group
