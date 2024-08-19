@@ -53,7 +53,7 @@ jobs:
       
       - name: Create instance template from existing VM
         run: |
-          INSTANCE_NAME=str-btx-template-v1
+          INSTANCE_NAME=str-btx-service-2h68
           RAW_TEMPLATE_NAME=str-btx-template-${{ github.event.release.tag_name }}
           TEMPLATE_NAME=$(echo $RAW_TEMPLATE_NAME | sed 's/\./-/g')
           gcloud compute instance-templates create $TEMPLATE_NAME \
@@ -64,7 +64,7 @@ jobs:
 
       - name: Update managed instance group
         run: |
-          INSTANCE_GROUP=my-instance-group
+          INSTANCE_GROUP=str-btx-service
           gcloud compute instance-groups managed rolling-action start-update $INSTANCE_GROUP \
             --version=template=$TEMPLATE_NAME \
             --region=europe-north1
