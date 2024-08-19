@@ -67,4 +67,4 @@ jobs:
           INSTANCE_GROUP=str-btx-service
           gcloud compute instance-groups managed rolling-action start-update $INSTANCE_GROUP \
             --version=template=$TEMPLATE_NAME \
-            --region=europe-north1
+            --zone=europe-north1-a
