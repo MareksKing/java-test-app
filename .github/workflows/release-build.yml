@@ -58,15 +58,15 @@ jobs:
           TEMPLATE_NAME=$(echo $RAW_TEMPLATE_NAME | sed 's/\./-/g')
           
           # Define environment variables
-          spring_profile=${{secrets.CONTAINER_SECRETS.spring_profile}}
-          port=${{secrets.CONTAINER_SECRETS.port}}
-          api-link=${{secrets.CONTAINER_SECRETS.api_link}}
+          spring_profile=${{env.SPRING_PROFILES_ACTIVE}}
+          port=${{env.API_PORT}}
+          api_link=${{env.OUTGOING_REQUEST_URL}}
           
           # Create a new instance template without a source instance
           gcloud compute instance-templates create $TEMPLATE_NAME \
             --region=europe-north1 \
             --network-interface=network=default,network-tier=PREMIUM,address='' \
-            --metadata=startup-script="#! /bin/bash\nsudo docker run -d --rm -e SPRING_PROFILES_ACTIVE=$spring_profile -e SERVER_PORT=$port -e API_LINK=$api-link europe-north1-docker.pkg.dev/straujupite-project/test-app-repo/test-app:${{ github.event.release.tag_name }}" 
+            --metadata=startup-script="#! /bin/bash\nsudo docker run -d --rm -e SPRING_PROFILES_ACTIVE=$spring_profile -e API_PORT=$port -e OUTGOING_REQUEST_URL=$api_link europe-north1-docker.pkg.dev/straujupite-project/test-app-repo/test-app:${{ github.event.release.tag_name }}" 
   
       - name: Update managed instance group
         run: |
